@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-12">
         <h1>Posts</h1>
         <h3>This file will list all the posts</h3>
         <section class="panel panel-success" v-if="posts.length">
