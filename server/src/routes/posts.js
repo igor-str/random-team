@@ -10,11 +10,11 @@ router.post('/posts', (req, res) => {
 
   post.save((err, data) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
       res.send({
         success: true,
-        message: `Post with ID_${data._id} saved successfully!`
+        message: `Post with ID_${data._id} saved successfully!`,
       })
     }
   });
@@ -23,11 +23,54 @@ router.post('/posts', (req, res) => {
 router.get('/posts', (req, res) => {
   Post.find({}, 'title description', (err, posts) => {
     if (err) {
-      res.sendStatus(500)
+      res.sendStatus(500);
     } else {
-      res.send({ posts: posts })
+      res.send({ posts: posts });
     }
-  }).sort({ _id: -1 })
-})
+  }).sort({ _id: -1 });
+});
+
+router.get('/posts/:id', (req, res) => {
+  Post.findById(req.params.id, 'title description', (err, post) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.send(post);
+    }
+  });
+});
+
+router.put('/posts/:id', (req, res) => {
+  Post.findById(req.params.id, 'title description', (err, post) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (req.body.title) {
+        post.title = req.body.title;
+      }
+      if (req.body.description) {
+        post.description = req.body.description;
+      }
+
+      post.save(err => {
+        if (err) {
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(200);
+        }
+      });
+    }
+  });
+});
+
+router.delete('/posts/:id', (req, res) => {
+  Post.remove({_id: req.params.id}, err => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
 
 module.exports = router;
