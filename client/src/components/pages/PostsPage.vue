@@ -42,7 +42,6 @@ export default {
   methods: {
     async getPosts() {
       const response = await PostsService.fetchPosts();
-      console.log(response);
       this.posts = response.data.posts;
     },
   },
