@@ -25,11 +25,11 @@ mongoose.connection
   })
   .on('error', error => console.warn(error));
 
-app.get('/posts', (req, res) => {
-    res.send(
-        [{
-            title: "Hello World!",
-            description: "Hi there! How are you?"
-        }]
-    )
-});
+// app.get('/posts', (req, res) => {
+//     res.send(
+//         [{
+//             title: "Hello World!",
+//             description: "Hi there! How are you?"
+//         }]
+//     )
+// });

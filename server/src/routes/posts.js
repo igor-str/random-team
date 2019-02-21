@@ -20,4 +20,14 @@ router.post('/posts', (req, res) => {
   });
 });
 
+router.get('/posts', (req, res) => {
+  Post.find({}, 'title description', (err, posts) => {
+    if (err) {
+      res.sendStatus(500)
+    } else {
+      res.send({ posts: posts })
+    }
+  }).sort({ _id: -1 })
+})
+
 module.exports = router;
