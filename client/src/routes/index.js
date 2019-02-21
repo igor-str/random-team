@@ -1,6 +1,7 @@
 import Start from '@/components/pages/StartPage';
 import Posts from '@/components/pages/PostsPage';
 import NewPost from '@/components/pages/NewPostPage';
+import EditPost from '@/components/pages/EditPostPage';
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
     path: '/posts/new',
     name: 'NewPost',
     component: NewPost,
+  },
+  {
+    path: '/posts/:id',
+    name: 'EditPost',
+    component: EditPost,
   },
 ];
 

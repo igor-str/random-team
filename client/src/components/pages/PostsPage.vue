@@ -15,6 +15,14 @@
             <tr v-for="(post) in posts" :key="post.title">
               <td>{{ post.title }}</td>
               <td>{{ post.description }}</td>
+              <td>
+                <router-link :to="{ name: 'EditPost', params: { id: post._id } }">
+                  edit post
+                </router-link>
+                <button class="btn btn-danger btn-sm" type="button" @click="removePost(post._id)">
+                  delete
+                </button>
+              </td>
             </tr>
           </table>
         </section>
@@ -43,6 +51,10 @@ export default {
     async getPosts() {
       const response = await PostsService.fetchPosts();
       this.posts = response.data.posts;
+    },
+    async removePost(value) {
+      await PostsService.deletePost(value);
+      this.getPosts();
     },
   },
   mounted() {
