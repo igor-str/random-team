@@ -1,6 +1,9 @@
 <template>
   <div class="form-group">
-    <input type="checkbox" id="id-name--1" name="set-name" class="switch-input">
+    <input type="checkbox" id="id-name--1" name="set-name"
+           class="switch-input"
+           :checked="isChecked"
+           @change="$emit('change', $event.target.checked)">
     <label for="id-name--1" class="switch-label">
       {{title}}
       <span class="toggle--on">{{onText}}</span>
@@ -22,6 +25,14 @@ export default {
     title: {
       type: String,
     },
+    isChecked: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  model: {
+    prop: 'checked',
+    event: 'change',
   },
 };
 </script>
