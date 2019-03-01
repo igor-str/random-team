@@ -2,30 +2,34 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  // email: {
-  //   type: String,
-  //   required: true,
-  //   trim: true,
-  //   unique: true,
-  //   default: null
-  // },
-  // password: {
-  //   type: String,
-  //   required: true
-  // },
-  // isAdmin: Boolean,
+  email: {
+    type: String,
+    trim: true,
+    default: null,
+    required: true,
+    // unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
   firstName: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   lastName: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   selfRating: {
     type: Number,
+    default: null,
   }
 });
 

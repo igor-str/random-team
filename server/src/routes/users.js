@@ -6,7 +6,9 @@ router.post('/users', (req, res) => {
   const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    selfRating: req.body.selfRating,
+    email: req.body.email,
+    password: req.body.password,
+    isAdmin: req.body.isAdmin,
   });
 
   user.save((err, data) => {
