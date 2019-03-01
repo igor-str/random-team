@@ -58,6 +58,7 @@ export default {
         // this.$router.push({ name: 'Users' });
       } else {
         // TODO: remove this alert
+        // eslint-disable-next-line
         alert('Empty fields!');
       }
     },

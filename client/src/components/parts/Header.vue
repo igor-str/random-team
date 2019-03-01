@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <router-link class="navbar-brand" :to="{name: 'Welcome'}">Home</router-link>
+    <router-link class="navbar-brand" :to="{name: 'Landing'}">Home</router-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -10,8 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <router-link class="nav-link" activeClass="active" :to="{name: 'Welcome'}">
+          <router-link class="nav-link" activeClass="active" :to="{name: 'Landing'}">
             Home
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" activeClass="active" :to="{name: 'Auth'}">
+            Registration
           </router-link>
         </li>
         <li class="nav-item">

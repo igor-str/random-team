@@ -3,6 +3,7 @@ import Posts from '@/pages/PostsPage';
 import NewPost from '@/pages/NewPostPage';
 import EditPost from '@/pages/EditPostPage';
 import NewUser from '@/pages/user/NewUserPage';
+import Auth from '@/pages/AuthPage';
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
+  },
+  {
+    path: '/auth',
+    name: 'Auth',
+    component: Auth,
   },
   {
     path: '/posts',
