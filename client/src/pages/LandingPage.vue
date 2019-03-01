@@ -1,10 +1,10 @@
 <template>
-    <div>Start page</div>
+    <div>LAnding page</div>
 </template>
 
 <script>
 export default {
-  name: 'start-page',
+  name: 'landing-page',
 };
 </script>
 

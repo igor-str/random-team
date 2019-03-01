@@ -1,13 +1,18 @@
-import Start from '@/components/pages/StartPage';
-import Posts from '@/components/pages/PostsPage';
-import NewPost from '@/components/pages/NewPostPage';
-import EditPost from '@/components/pages/EditPostPage';
+import Landing from '@/pages/LandingPage';
+import Posts from '@/pages/PostsPage';
+import NewPost from '@/pages/NewPostPage';
+import EditPost from '@/pages/EditPostPage';
+import NewUser from '@/pages/user/NewUserPage';
 
 const routes = [
   {
+    path: '*',
+    redirect: '/',
+  },
+  {
     path: '/',
-    name: 'Start',
-    component: Start,
+    name: 'Landing',
+    component: Landing,
   },
   {
     path: '/posts',
@@ -23,6 +28,11 @@ const routes = [
     path: '/posts/:id',
     name: 'EditPost',
     component: EditPost,
+  },
+  {
+    path: '/users/newUser',
+    name: 'NewUser',
+    component: NewUser,
   },
 ];
 

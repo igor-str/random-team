@@ -53,6 +53,7 @@ export default {
 
         this.$router.push({ name: 'Posts' });
       } else {
+        // TODO: remove this alert
         alert('Empty fields!');
       }
     },
