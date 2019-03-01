@@ -1,58 +1,59 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/post-model');
+const User = require('../models/userModel');
 
-router.post('/posts', (req, res) => {
-  const post = new Post({
-    title: req.body.title,
-    description: req.body.description,
+router.post('/users', (req, res) => {
+  const user = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    selfRating: req.body.selfRating,
   });
 
-  post.save((err, data) => {
+  user.save((err, data) => {
     if (err) {
       console.log(err);
     } else {
       res.send({
         success: true,
-        message: `Post with ID_${data._id} saved successfully!`,
+        message: `User with ID_${data._id} saved successfully!`,
       })
     }
   });
 });
 
-router.get('/posts', (req, res) => {
-  Post.find({}, 'title description', (err, posts) => {
+router.get('/users', (req, res) => {
+  User.find({}, 'name selfRating', (err, users) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      res.send({ posts: posts });
+      res.send({ users: users });
     }
   }).sort({ _id: -1 });
 });
 
-router.get('/posts/:id', (req, res) => {
-  Post.findById(req.params.id, 'title description', (err, post) => {
+router.get('/users/:id', (req, res) => {
+  User.findById(req.params.id, 'name selfRating', (err, user) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      res.send(post);
+      res.send(user);
     }
   });
 });
 
-router.put('/posts/:id', (req, res) => {
-  Post.findById(req.params.id, 'title description', (err, post) => {
+router.put('/users/:id', (req, res) => {
+  User.findById(req.params.id, 'name selfRating', (err, user) => {
     if (err) {
       console.log(err);
     } else {
-      if (req.body.title) {
-        post.title = req.body.title;
+      if (req.body.name) {
+        user.name = req.body.name;
       }
-      if (req.body.description) {
-        post.description = req.body.description;
+      if (req.body.selfRating) {
+        user.selfRating = req.body.selfRating;
       }
 
-      post.save(err => {
+      user.save(err => {
         if (err) {
           res.sendStatus(500);
         } else {
@@ -63,8 +64,8 @@ router.put('/posts/:id', (req, res) => {
   });
 });
 
-router.delete('/posts/:id', (req, res) => {
-  Post.remove({_id: req.params.id}, err => {
+router.delete('/users/:id', (req, res) => {
+  User.remove({_id: req.params.id}, err => {
     if (err) {
       res.sendStatus(500);
     } else {
