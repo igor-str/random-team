@@ -14,6 +14,8 @@ router.post('/users', (req, res) => {
   user.save((err, data) => {
     if (err) {
       console.log(err);
+      res.status(400);
+      res.send('User is not created!');
     } else {
       res.send({
         success: true,
@@ -24,7 +26,7 @@ router.post('/users', (req, res) => {
 });
 
 router.get('/users', (req, res) => {
-  User.find({}, 'name selfRating', (err, users) => {
+  User.find({}, 'firstName lastName isAdmin', (err, users) => {
     if (err) {
       res.sendStatus(500);
     } else {
