@@ -4,6 +4,7 @@ import NewPost from '@/pages/NewPostPage';
 import EditPost from '@/pages/EditPostPage';
 import NewUser from '@/pages/user/NewUserPage';
 import Auth from '@/pages/AuthPage';
+import Login from '@/pages/LoginPage';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     component: Auth,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
   {
     path: '/posts',

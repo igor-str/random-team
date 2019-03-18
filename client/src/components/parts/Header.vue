@@ -20,6 +20,11 @@
           </router-link>
         </li>
         <li class="nav-item">
+          <router-link class="nav-link" activeClass="active" :to="{name: 'Login'}">
+            Login
+          </router-link>
+        </li>
+        <li class="nav-item">
           <router-link class="nav-link" activeClass="active" :to="{name: 'NewUser'}">
             Create user
           </router-link>
