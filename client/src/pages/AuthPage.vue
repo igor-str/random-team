@@ -76,9 +76,14 @@ export default {
           email: this.user.email,
           password: this.user.password,
           isAdmin: this.user.isAdmin,
+        }).then((res) => {
+          this.$toasted.success(res.data.message, {
+            theme: 'toasted-primary',
+            position: 'bottom-right',
+            duration: 3000,
+          });
         });
-        // TODO: set url or name component
-        // this.$router.push({ name: 'Users' });
+        this.$router.push({ name: 'Landing' });
       } else {
         this.errors.push('Ooops, not the correct data! try again...');
       }
