@@ -20,8 +20,8 @@
         </div>
         <div class="form-group">
           <button type="button" name="addPost" id="addPost"
-                  class="btn btn-success" @blur="clearErrors()" @click="loginUser()">
-            Register
+                  class="btn btn-success" @blur="clearErrors()" @click="login()">
+            Login
           </button>
         </div>
       </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import UsersService from '@/services/UsersService';
+import AuthService from '@/services/AuthService';
 
 export default {
   name: 'LoginPage',
@@ -44,12 +44,17 @@ export default {
     };
   },
   methods: {
-    async loginUser() {
+    async login() {
       if (this.validateBeforeLogin()) {
-        // TODO: create login Service
-        await UsersService.addNewUser({
-          email: this.user.email,
+        await AuthService.loginUser({
+          username: this.user.email,
           password: this.user.password,
+        }).then(() => {
+          this.$toasted.success('Login succsess', {
+            theme: 'toasted-primary',
+            position: 'top-right',
+            duration: 3000,
+          });
         });
         // TODO: set url or name component
         // this.$router.push({ name: 'Users' });
