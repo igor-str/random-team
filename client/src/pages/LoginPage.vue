@@ -55,6 +55,12 @@ export default {
             position: 'top-right',
             duration: 3000,
           });
+        }).catch(() => {
+          this.$toasted.error('Login or password is incorrect', {
+            theme: 'toasted-primary',
+            position: 'top-right',
+            duration: 3000,
+          });
         });
         // TODO: set url or name component
         // this.$router.push({ name: 'Users' });
