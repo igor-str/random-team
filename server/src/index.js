@@ -6,13 +6,11 @@ const cors = require('cors');
 const morgan = require('morgan');
 const config = require('./config/config');
 const mongoose = require('mongoose');
+const models = require('./models');
 
 // TODO: remove posts
 const posts = require('./routes/posts');
 const users = require('./routes/users');
-
-const ADMIN = 'test';
-const ADMIN_PASSWORD = '123456';
 
 mongoose.Promise = global.Promise;
 
@@ -37,11 +35,14 @@ mongoose.connection
 
 
 passport.use(new LocalStrategy((username, password, done) => {
-    if (username === ADMIN && password === ADMIN_PASSWORD) {
-        done(null, 'TOKEN');
-        return;
-    }
-    done(null, false);
+    return models.User.findOne({email: username})
+      .then((user) => {
+        if (user.password === password) {
+          done(null, user);
+          return
+        }
+        done(null, false);
+    });
 }));
 
 app.post('/login', passport.authenticate('local', { session: false }),
