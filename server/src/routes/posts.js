@@ -1,3 +1,4 @@
+// TODO: this code is example for requests
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/post-model');

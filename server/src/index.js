@@ -8,8 +8,6 @@ const config = require('./config/config');
 const mongoose = require('mongoose');
 const models = require('./models');
 
-// TODO: remove posts
-const posts = require('./routes/posts');
 const users = require('./routes/users');
 
 mongoose.Promise = global.Promise;
@@ -19,8 +17,6 @@ const app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
-// TODO: remove posts
-app.use(posts);
 app.use(users);
 
 mongoose.connect(config.dbURL, config.dbOptions);
@@ -35,20 +31,22 @@ mongoose.connection
 
 
 passport.use(new LocalStrategy((username, password, done) => {
-    return models.User.findOne({email: username})
-      .then((user) => {
-        if (user.password === password) {
-          done(null, user);
-          return
-        }
-        done(null, false);
+  return models.User.findOne({email: username})
+    .then((user) => {
+      if (user.password === password) {
+        done(null, user);
+        return
+      }
+      done(null, false);
+    }).catch((err) => {
+      done(null, false);
     });
 }));
 
-app.post('/login', passport.authenticate('local', { session: false }),
-    (req, res) => {
-        res.send({
-            token: req.user,
-        });
-    },
+app.post('/login', passport.authenticate('local', {session: false}),
+  (req, res) => {
+    res.send({
+      user: req.user,
+    });
+  },
 );
