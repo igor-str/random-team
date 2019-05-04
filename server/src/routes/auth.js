@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel');
+const passport = require('passport');
 
 router.post('/register', (req, res) => {
   const user = new User({
@@ -23,6 +24,25 @@ router.post('/register', (req, res) => {
       })
     }
   });
+});
+
+router.post('/login', passport.authenticate('local', {session: false}),
+  (req, res) => {
+    res.send({
+      user: req.user,
+    });
+  },
+);
+
+router.get('/logout', (req, res) => {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(() => {
+      res.redirect('/');
+    });
+  } else {
+    res.redirect('/');
+  }
 });
 
 module.exports = router;

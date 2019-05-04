@@ -1,14 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const cors = require('cors');
 const morgan = require('morgan');
 const config = require('./config/config');
 const mongoose = require('mongoose');
-const models = require('./models');
 
 const users = require('./routes/users');
+const auth = require('./routes/auth');
+const passport = require('./config/passport'); // not delete this
 
 mongoose.Promise = global.Promise;
 
@@ -18,6 +17,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(users);
+app.use(auth);
 
 mongoose.connect(config.dbURL, config.dbOptions);
 
@@ -28,25 +28,3 @@ mongoose.connection
       () => console.log(`Server start on port ${config.port} ...`));
   })
   .on('error', error => console.warn(error));
-
-
-passport.use(new LocalStrategy((username, password, done) => {
-  return models.User.findOne({email: username})
-    .then((user) => {
-      if (user.password === password) {
-        done(null, user);
-        return
-      }
-      done(null, false);
-    }).catch((err) => {
-      done(null, false);
-    });
-}));
-
-app.post('/login', passport.authenticate('local', {session: false}),
-  (req, res) => {
-    res.send({
-      user: req.user,
-    });
-  },
-);
